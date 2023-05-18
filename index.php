@@ -20,85 +20,9 @@
         
     </section>
     <!-- section destination -->
-    <section id="Les-écoles-disponibles">
-        <h1 class="title">Les écoles disponibles</h1>
-        <div class="content">
-            <!-- box -->
-            <div class="box">
-                <img src="images/infinity.jpg" alt="">
-                <div class="content">
-                    <div>
-                        <h4>infinity School</h4>
-                        <a href="infinity.html">Lire Plus</a>
-                    </div>
-                </div>
-            </div>
-            <!-- box -->
-            <!-- box -->
-            <div class="box">
-                <img src="images/images/youth.jpg" alt="">
-                <div class="content">
-                    <div>
-                        <h4>youth acadimy</h4>
-                        <a href="youth.html">Lire Plus</a>
-                    </div>
-                </div>
-            </div>
-            <!-- box -->
-            <!-- box -->
-            <div class="box">
-                <img src="images/images/infinity.jpg" alt="">
-                <div class="content">
-                    <div>
-                        <h4>infinity School</h4>
-                        <p>ecole prevé.</p></br>
-                        <a href="infinity.html">Lire Plus</a>
-                    </div>
-                </div>
-            </div>
-            <!-- box -->
-             <!-- box -->
-             <div class="box">
-                <img src="images/images/i3 (1).jpeg" alt="">
-                <div class="content">
-                    <div>
-                        <h4>Ecole Benabide</h4>
-                        <p>ECOLE BENABID</p>
-                        <p>pour l'enseignement des langues étrangéres</p>
-                        <a href="benabid.html">Lire Plus</a>
-                    </div>
-                </div>
-            </div>
-            <!-- box -->
-             <!-- box -->
-             <div class="box">
-                <img src="images/images/i7.png" alt="">
-                <div class="content">
-                    <div>
-                        <h4>New géneration School</h4>
-                        <p>Quand apprendre est amusant</p>
-                        <p>l'avenir devient prometteur</p>
-                        <a href="ngs.html">Lire Plus</a>
-                    </div>
-                </div>
-            </div>
-            <!-- box -->
-             <!-- box -->
-             <div class="box">
-                <img src="images/images/i5 (1).jpeg" alt="">
-                <div class="content">
-                    <div>
-                        <h4>Sakhraoui</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <p>Ea iusto ipsa repudiandae amet conseq.</p>
-                        <a href="sakhraoui.html">Lire Plus</a>
-                    </div>
-                </div>
-            </div>
-            <!-- box -->
-        </div>
-    </section>
-
+   <?php 
+        include 'features/school/school_grid.php';
+   ?>
 
 </body>
 </html>
