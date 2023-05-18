@@ -1,0 +1,104 @@
+
+
+
+<?php include_once 'components/header.php'; ?>
+
+
+<body>
+    
+   <?php 
+       include_once 'components/home_navbar.php';
+   ?>
+    <!-- acceuil section -->
+
+    <section id="Acceuil">
+        <h2> Bienvenue</h2>
+        <h4>Une génération productrice de savoir</h4>
+        <p> Ce site web vous aide à trouver les emplacements de toutes les écoles</p>
+        <p>nous vous donnons également la possibilité de voir tous tous les cours disponibles </p>
+        <p>auxquels vous pouvez vous inscrire en ligne po vous épargner beaucoup de temps et d'efforts! </p>
+        
+    </section>
+    <!-- section destination -->
+    <section id="Les-écoles-disponibles">
+        <h1 class="title">Les écoles disponibles</h1>
+        <div class="content">
+            <!-- box -->
+            <div class="box">
+                <img src="images/infinity.jpg" alt="">
+                <div class="content">
+                    <div>
+                        <h4>infinity School</h4>
+                        <a href="infinity.html">Lire Plus</a>
+                    </div>
+                </div>
+            </div>
+            <!-- box -->
+            <!-- box -->
+            <div class="box">
+                <img src="images/images/youth.jpg" alt="">
+                <div class="content">
+                    <div>
+                        <h4>youth acadimy</h4>
+                        <a href="youth.html">Lire Plus</a>
+                    </div>
+                </div>
+            </div>
+            <!-- box -->
+            <!-- box -->
+            <div class="box">
+                <img src="images/images/infinity.jpg" alt="">
+                <div class="content">
+                    <div>
+                        <h4>infinity School</h4>
+                        <p>ecole prevé.</p></br>
+                        <a href="infinity.html">Lire Plus</a>
+                    </div>
+                </div>
+            </div>
+            <!-- box -->
+             <!-- box -->
+             <div class="box">
+                <img src="images/images/i3 (1).jpeg" alt="">
+                <div class="content">
+                    <div>
+                        <h4>Ecole Benabide</h4>
+                        <p>ECOLE BENABID</p>
+                        <p>pour l'enseignement des langues étrangéres</p>
+                        <a href="benabid.html">Lire Plus</a>
+                    </div>
+                </div>
+            </div>
+            <!-- box -->
+             <!-- box -->
+             <div class="box">
+                <img src="images/images/i7.png" alt="">
+                <div class="content">
+                    <div>
+                        <h4>New géneration School</h4>
+                        <p>Quand apprendre est amusant</p>
+                        <p>l'avenir devient prometteur</p>
+                        <a href="ngs.html">Lire Plus</a>
+                    </div>
+                </div>
+            </div>
+            <!-- box -->
+             <!-- box -->
+             <div class="box">
+                <img src="images/images/i5 (1).jpeg" alt="">
+                <div class="content">
+                    <div>
+                        <h4>Sakhraoui</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p>Ea iusto ipsa repudiandae amet conseq.</p>
+                        <a href="sakhraoui.html">Lire Plus</a>
+                    </div>
+                </div>
+            </div>
+            <!-- box -->
+        </div>
+    </section>
+
+
+</body>
+</html>
