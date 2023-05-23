@@ -1,6 +1,6 @@
 <header>
         <div class="logo">
-            <a href="index.html"> <span>My</span> School</a>
+            <a href="/"> <span>My</span> School</a>
         </div>
         <ul class="menu">
             <li><a href="#Acceuil">ACCEUIL</a></li>

@@ -22,7 +22,6 @@ class DatabaseCreator
             $query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = :dbname";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':dbname', $dbname);
-            $stmt->execute();
 
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -40,18 +39,19 @@ class DatabaseCreator
 
     private function createSchema($conn)
     {
+        $rootPath= $_SERVER['DOCUMENT_ROOT'] ;
+
         try{
-        $sqlFile = "helpers/database/schema.sql";
+        $sqlFile = $rootPath."/helpers/database/schema.sql";
 
         $sql = file_get_contents($sqlFile);
         $conn->exec($sql);
 
-        $sqlFile = "helpers/database/data.sql";
+        $sqlFile = $rootPath."/helpers/database/data.sql";
         $sql = file_get_contents($sqlFile);
         $conn->exec($sql);
         }
         catch(Exception $e){
-            echo " failed: " . $e->getMessage();
 
         }
     }

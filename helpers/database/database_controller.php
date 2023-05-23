@@ -1,9 +1,12 @@
 <?php
 
-include_once "data/school.php";
-include_once "data/user.php";
-include_once "data/database_options.php";
-include_once "data/formation.php";
+$rootPath = $_SERVER['DOCUMENT_ROOT'];
+
+
+include_once $rootPath . "/data/school.php";
+include_once $rootPath . "/data/user.php";
+include_once $rootPath . "/data/database_options.php";
+include_once $rootPath . "/data/formation.php";
 
 class DatabaseController
 {
@@ -40,7 +43,7 @@ class DatabaseController
         return $schools;
     }
 
-    public function getSchool(String $schoolId)
+    public function getSchool(string $schoolId)
     {
         $query = "SELECT * FROM School WHERE school_id = :school_id";
 
@@ -68,7 +71,7 @@ class DatabaseController
         return null;
     }
 
-    public function getSchoolFormations(String $schoolId): array
+    public function getSchoolFormations(string $schoolId): array
     {
         $query = "SELECT * FROM Formation WHERE formation_school_id = :school_id";
         $stmt = $this->pdo->prepare($query);
@@ -83,7 +86,7 @@ class DatabaseController
             $formation = new Formation();
             $formation->id = $row['formation_id'];
             $formation->name = $row['formation_name'];
-           
+
 
             array_push($formations, $formation);
         }
@@ -130,6 +133,25 @@ class DatabaseController
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':formation_id', $formationId);
         $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+    }
+
+    function RegisterPendingApplication(RegisterPendingApplicationOptions $options)
+    {
+        $query = "INSERT INTO PendingApplications (nom ,objet ,email ,commentaire   ,
+        numero ,date ,autres  ,adresse )
+         VALUES(:nom ,:objet ,:email ,:commentaire,:numero ,:date ,:autres , 'adresse' )";
+        $stmt = $this->pdo->prepare($query);
+
+
+        $stmt->bindParam(':nom', $options->nom);
+        $stmt->bindParam(':objet', $options->objet);
+        $stmt->bindParam(':email', $options->email);
+        $stmt->bindParam(':commentaire', $options->commentaire);
+        $stmt->bindParam(':numero', $options->numero);
+        $stmt->bindParam(':date', $options->date);
+        $stmt->bindParam(':autres', $options->autres);
+
         $stmt->execute();
     }
 

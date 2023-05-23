@@ -31,3 +31,15 @@ CREATE TABLE IF NOT EXISTS FormationApplication (
     FOREIGN KEY (formation_application_user_id) REFERENCES User(user_id),
     FOREIGN KEY (formation_application_formation_id) REFERENCES Formation(formation_id)
 );
+
+CREATE TABLE IF NOT EXISTS PendingApplications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(255) NOT NULL,
+    objet VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    commentaire TEXT  ,
+    numero VARCHAR(20) NOT NULL,
+    date TEXT NOT NULL,
+    autres VARCHAR(255) ,
+    adresse VARCHAR(255) NOT NULL
+)
