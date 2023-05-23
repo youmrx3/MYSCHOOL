@@ -2,11 +2,17 @@
 
 
 <div class="box">
-    <img src="images/infinity.jpg" alt="">
+    <?php 
+    echo '<img src="'.$school->imageUrl.'" alt=""> ' ;
+    ?>
     <div class="content">
         <div>
-            <h4>infinity School</h4>
-            <a href="school.php">Lire Plus</a>
+        <?php 
+             echo '<h4>'.$school->name.'</h4>';
+             echo '<a href="school.php?schoolId='. $school->schoolId .'">Lire Plus</a>';
+
+        ?>
+           
         </div>
     </div>
 </div>

@@ -13,8 +13,9 @@ class DatabaseCreator
     public function connectToDatabase(): PDO
     {
 
+
         try {
-            $url = "mysql:host=$this->servername;dbname=$this->dbname";
+            $url = "mysql:host=$this->servername";
             $conn = new PDO($url, $this->username, $this->password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -25,7 +26,7 @@ class DatabaseCreator
 
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if (!$result) {
+            if ($result == null) {
                 $this->createSchema($conn);
             }
 
@@ -39,10 +40,20 @@ class DatabaseCreator
 
     private function createSchema($conn)
     {
-        $sqlFile = "schema.sql";
+        try{
+        $sqlFile = "helpers/database/schema.sql";
 
         $sql = file_get_contents($sqlFile);
         $conn->exec($sql);
+
+        $sqlFile = "helpers/database/data.sql";
+        $sql = file_get_contents($sqlFile);
+        $conn->exec($sql);
+        }
+        catch(Exception $e){
+            echo " failed: " . $e->getMessage();
+
+        }
     }
 
 }

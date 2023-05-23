@@ -1,10 +1,10 @@
 <?php 
 
     class User{
-        private String $email;
-        private String $name;
+        public String $email;
+        public String $name;
 
-        private int $id;
+        public int $id;
     }
 
 

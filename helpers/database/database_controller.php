@@ -1,5 +1,9 @@
 <?php
 
+include_once "data/school.php";
+include_once "data/user.php";
+include_once "data/database_options.php";
+include_once "data/formation.php";
 
 class DatabaseController
 {
@@ -14,30 +18,82 @@ class DatabaseController
 
     public function getSchools(): array
     {
-        $query = "SELECT * FROM school";
+        $query = "SELECT * FROM School";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
 
-        $schools = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+        $schools = array();
+
+        foreach ($result as $row) {
+            $school = new School();
+            $school->schoolId = $row['school_id'];
+            $school->name = $row['school_name'];
+            $school->imageUrl = $row['school_image_url'];
+            $school->videoUrl = $row['school_video'];
+            $school->description = $row['school_description'];
+
+            array_push($schools, $school);
+        }
         return $schools;
     }
 
-    public function getSchoolFormations(int $schoolId): array
+    public function getSchool(String $schoolId)
     {
-        $query = "SELECT * FROM formation WHERE school_id = :school_id";
+        $query = "SELECT * FROM School WHERE school_id = :school_id";
+
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':school_id', $schoolId);
         $stmt->execute();
 
-        $formations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        if ($result) {
+            $school = new School();
+            $school->schoolId = $result['school_id'];
+            $school->name = $result['school_name'];
+            $school->imageUrl = $result['school_image_url'];
+            $school->videoUrl = $result['school_video'];
+            $school->description = $result['school_description'];
+
+            return $school;
+        }
+
+
+
+
+        return null;
+    }
+
+    public function getSchoolFormations(String $schoolId): array
+    {
+        $query = "SELECT * FROM Formation WHERE formation_school_id = :school_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':school_id', $schoolId);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $formations = array();
+
+        foreach ($result as $row) {
+            $formation = new Formation();
+            $formation->id = $row['formation_id'];
+            $formation->name = $row['formation_name'];
+           
+
+            array_push($formations, $formation);
+        }
 
         return $formations;
     }
 
     public function registerUser(RegisterUserOptions $user)
     {
-        $query = "INSERT INTO user (email, password, name, school_id) VALUES (:email, :password, :name, :school_id)";
+        $query = "INSERT INTO User (email, password, name, school_id) VALUES (:email, :password, :name, :school_id)";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':email', $user->email);
         $stmt->bindParam(':password', $user->password);
@@ -47,7 +103,7 @@ class DatabaseController
     }
     public function loginUser(LoginOptions $options): User
     {
-        $query = "SELECT * FROM user WHERE email = :email AND password = :password";
+        $query = "SELECT * FROM User WHERE email = :email AND password = :password";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':email', $options->email);
         $stmt->bindParam(':password', $options->password);
@@ -70,7 +126,7 @@ class DatabaseController
 
     function applyToFormation(int $formationId, int $userId)
     {
-        $query = "INSERT INTO formation_user (formation_id, user_id) VALUES (:formation_id, :user_id)";
+        $query = "INSERT INTO FormationApplication (formation_id, user_id) VALUES (:formation_id, :user_id)";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':formation_id', $formationId);
         $stmt->bindParam(':user_id', $userId);
@@ -78,9 +134,11 @@ class DatabaseController
     }
 
 
+
+
     function loadUserFormations(int $userId): array
     {
-        $query = "SELECT formation_id FROM formation_user WHERE user_id = :user_id";
+        $query = "SELECT formation_id FROM FormationApplication WHERE user_id = :user_id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();
