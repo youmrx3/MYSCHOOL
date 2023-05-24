@@ -56,7 +56,7 @@ class DatabaseCreator
         $conn->exec($sql);
         }
         catch(Exception $e){
-
+            // echo "Error creating schema: " . $e->getMessage();
         }
     }
 

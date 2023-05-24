@@ -96,17 +96,16 @@ class DatabaseController
 
     public function registerUser(RegisterUserOptions $user)
     {
-        $query = "INSERT INTO User (email, password, name, school_id) VALUES (:email, :password, :name, :school_id)";
+        $query = "INSERT INTO User (email, user_password, username) VALUES (:email, :password, :name)";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':email', $user->email);
         $stmt->bindParam(':password', $user->password);
         $stmt->bindParam(':name', $user->name);
-        $stmt->bindParam(':school_id', $user->schoolId);
         $stmt->execute();
     }
-    public function loginUser(LoginOptions $options): User
+    public function loginUser(LoginOptions $options): User | null
     {
-        $query = "SELECT * FROM User WHERE email = :email AND password = :password";
+        $query = "SELECT * FROM User WHERE email = :email AND user_password = :password";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':email', $options->email);
         $stmt->bindParam(':password', $options->password);
@@ -117,13 +116,13 @@ class DatabaseController
 
         if ($result) {
             $user = new User();
-            $user->id = $result['id'];
-            $user->name = $result['name'];
+            $user->id = $result['user_id'];
+            $user->name = $result['username'];
             $user->email = $result['email'];
             return $user;
-        } else {
-            throw new Exception("Invalid login credentials.");
-        }
+        } 
+
+        return null;
     }
 
 

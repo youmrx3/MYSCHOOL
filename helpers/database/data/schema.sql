@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS FormationApplication (
     formation_application_id INT PRIMARY KEY AUTO_INCREMENT,
     formation_application_user_id INT NOT NULL,
     formation_application_school_id INT NOT NULL,
+
     FOREIGN KEY (formation_application_user_id) REFERENCES User(user_id),
     FOREIGN KEY (formation_application_school_id) REFERENCES School(school_id)
 );
@@ -42,7 +43,7 @@ CREATE TABLE IF NOT EXISTS PendingApplications (
     date TEXT NOT NULL,
     autres VARCHAR(255) ,
     adresse VARCHAR(255) NOT NULL,
-    formation_id INT NOT NULL 
+    school_id INT NOT NULL ,
 
-    FOREIGN KEY (formation_id) REFERENCES Formation(formation_id)
+    FOREIGN KEY (school_id) REFERENCES School(school_id)
 )

@@ -1,6 +1,6 @@
 
 
-INSERT INTO USER VALUES(1,"customer","customer","customer@test.com");
+INSERT INTO User VALUES(1,"customer","customer","customer@test.com");
 
-INSERT INTO FormationApplication VALUES(1,1);
+INSERT INTO FormationApplication VALUES(1,1,1);
 
