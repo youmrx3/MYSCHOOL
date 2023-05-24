@@ -13,6 +13,8 @@ include_once 'components/header.php';
 
     <?php
     include_once 'components/home_navbar.php';
+    include_once 'features/login/login_modal.php';
+
     ?>
 
     <section id="Acceuil">

@@ -138,9 +138,9 @@ class DatabaseController
 
     function RegisterPendingApplication(RegisterPendingApplicationOptions $options)
     {
-        $query = "INSERT INTO PendingApplications (nom ,objet ,email ,commentaire   ,
-        numero ,date ,autres  ,adresse )
-         VALUES(:nom ,:objet ,:email ,:commentaire,:numero ,:date ,:autres , 'adresse' )";
+        $query = "INSERT INTO PendingApplications (nom ,objet ,email ,commentaire ,
+        numero ,date ,autres  ,adresse,formationId )
+         VALUES(:nom ,:objet ,:email ,:commentaire,:numero ,:date ,:autres , 'adresse',:formationId )";
         $stmt = $this->pdo->prepare($query);
 
 
@@ -151,6 +151,7 @@ class DatabaseController
         $stmt->bindParam(':numero', $options->numero);
         $stmt->bindParam(':date', $options->date);
         $stmt->bindParam(':autres', $options->autres);
+        $stmt->bindParam(':formationId', $options-> formationId);
 
         $stmt->execute();
     }

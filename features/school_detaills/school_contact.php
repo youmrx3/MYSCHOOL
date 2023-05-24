@@ -4,6 +4,9 @@
         <form method="POST" action="api/registerNewApplication.php">
             <div class="left-right">
                 <div class="left">
+                    <?php 
+                        echo '<input type="hidden" name="formationId" value="' . $schoolId.'" />'; 
+                    ?>
                     <label>Nom Complet</label>
                     <input type="text" name="nom">
                     <label>Objet</label>

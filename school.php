@@ -5,6 +5,8 @@ include_once 'helpers/database/database_controller.php';
 
 include_once 'helpers/database/database_creator.php';
 
+include_once 'features/login/login_modal.php';
+
 $db = new DatabaseCreator();
 $conn = $db->connectToDatabase();
 $controller = new DatabaseController($conn);

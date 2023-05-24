@@ -5,6 +5,13 @@ class LoginOptions
 {
     public string $email;
     public string $password;
+
+    public function __construct(string $email, string $password)
+    {
+        $this->email = $email;
+        $this->password = $password;
+
+    }
 }
 
 class RegisterUserOptions
@@ -25,7 +32,10 @@ class RegisterPendingApplicationOptions
     public $numero;
     public $date;
     public $autres;
-    public function __construct($nom, $objet, $email, $commentaire, $numero, $date, $autres) {
+
+    public $formationId;
+
+    public function __construct($nom, $objet, $email, $commentaire, $numero, $date, $autres, $formationId) {
         $this->nom = $nom;
         $this->objet = $objet;
         $this->email = $email;
@@ -33,6 +43,7 @@ class RegisterPendingApplicationOptions
         $this->numero = $numero;
         $this->date = $date;
         $this->autres = $autres;
+        $this ->  $formationId =  $formationId;
     }
 
 }

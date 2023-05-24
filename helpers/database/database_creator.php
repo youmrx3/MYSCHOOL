@@ -42,12 +42,16 @@ class DatabaseCreator
         $rootPath= $_SERVER['DOCUMENT_ROOT'] ;
 
         try{
-        $sqlFile = $rootPath."/helpers/database/schema.sql";
+        $sqlFile = $rootPath."/helpers/database/data/schema.sql";
 
         $sql = file_get_contents($sqlFile);
         $conn->exec($sql);
 
-        $sqlFile = $rootPath."/helpers/database/data.sql";
+        $sqlFile = $rootPath."/helpers/database/data/schools.sql";
+        $sql = file_get_contents($sqlFile);
+        $conn->exec($sql);
+
+        $sqlFile = $rootPath."/helpers/database/data/user.sql";
         $sql = file_get_contents($sqlFile);
         $conn->exec($sql);
         }

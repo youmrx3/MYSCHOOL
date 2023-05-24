@@ -1,5 +1,6 @@
 <?php
 
+
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
 
 include_once $rootPath . '/components/enable_error_logging.php';
@@ -16,22 +17,18 @@ $conn = $db->connectToDatabase();
 $controller = new DatabaseController($conn);
 
 
-$options = new RegisterPendingApplicationOptions(
-    $_POST['nom'],
-    $_POST['objet'],
-    $_POST['email'],
-    $_POST['commentaire'],
-    $_POST['numero'],
-    $_POST['date'],
-    $_POST['autres'],
-    $_POST['formationId']
-);
+$options = new LoginOptions($_POST['email'], $_POST['password']);
+
+$user = $controller->loginUser($options);
+
+if ($user != null) {
+    echo "Login Success";
+
+    return;
+}
 
 
-$controller->RegisterPendingApplication($options);
-
-
-echo "Application Sent Wait For Admin Approval";
+echo "Login Failed";
 
 
 ?>
