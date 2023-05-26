@@ -2,7 +2,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     
 /* Full-width input fields */
 input[type=text], input[type=password] {
-  width: 50%;
+  width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -18,7 +18,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: context-menu;
-  width: 50%;
+  width: 100%;
 }
 
 button:hover {
@@ -34,15 +34,17 @@ button:hover {
 
 /* position the close button */
 
-.container {
+.login-container {
   padding: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 2; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -58,7 +60,7 @@ button:hover {
   background-color: #ffffff;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #000000;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: fit-content; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */

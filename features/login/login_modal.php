@@ -10,7 +10,7 @@
           title="Close Modal">&times;</span>
       </div>
 
-      <div class="container">
+      <div class="login-container">
         <label for="uname"><b>email </b></label>
         <input type="text" placeholder="Enter Username" name="email" required></br>
 
@@ -22,7 +22,7 @@
         </button></algine>
       </div>
 
-      <div class="container" style="background-color:#faf7f7">
+      <div class="login-container" style="background-color:#faf7f7">
         <button type="button" onclick="document.getElementById('id01').style.display='none'"
           class="cancelbtn">Cancel</button>
       </div>

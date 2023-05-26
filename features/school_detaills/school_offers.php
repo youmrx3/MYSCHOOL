@@ -4,6 +4,7 @@
 <section id="formation" style="background-color: rgb(0, 0, 0);">
     <h1 class="title" style="color: rgb(244, 114, 33);">Formation </h1>
 
+    <div class="formations-list">
         <?php 
         
             foreach($formations as $formation){
@@ -12,6 +13,6 @@
             }
         
         ?>
-
+    </div>
   
 </section>
