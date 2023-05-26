@@ -103,7 +103,7 @@ class DatabaseController
         $stmt->bindParam(':name', $user->name);
         $stmt->execute();
     }
-    public function loginUser(LoginOptions $options): User | null
+    public function loginUser(LoginOptions $options): User|null
     {
         $query = "SELECT * FROM User WHERE email = :email AND user_password = :password";
         $stmt = $this->pdo->prepare($query);
@@ -120,7 +120,7 @@ class DatabaseController
             $user->name = $result['username'];
             $user->email = $result['email'];
             return $user;
-        } 
+        }
 
         return null;
     }
@@ -150,7 +150,7 @@ class DatabaseController
         $stmt->bindParam(':numero', $options->numero);
         $stmt->bindParam(':date', $options->date);
         $stmt->bindParam(':autres', $options->autres);
-        $stmt->bindParam(':formationId', $options-> formationId);
+        $stmt->bindParam(':formationId', $options->formationId);
 
         $stmt->execute();
     }
@@ -160,7 +160,11 @@ class DatabaseController
 
     function loadUserFormations(int $userId): array
     {
-        $query = "SELECT formation_id FROM FormationApplication WHERE user_id = :user_id";
+        $query = "
+        SELECT *
+        FROM School
+        INNER JOIN FormationApplication ON School.school_id = FormationApplication.formation_application_school_id
+        WHERE FormationApplication.formation_application_user_id = :user_id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();
@@ -170,14 +174,19 @@ class DatabaseController
         $formations = array();
 
         foreach ($result as $row) {
-            $formation = new Formation();
-            $formation->id = $row['formation_id'];
-            $formation->name = $row['formation_name'];
-            array_push($formations, $formation);
+            $school = new School();
+            $school->schoolId = $row['school_id'];
+            $school->name = $row['school_name'];
+            $school->imageUrl = $row['school_image_url'];
+            $school->videoUrl = $row['school_video'];
+            $school->description = $row['school_description'];
+            array_push($formations, $school);
         }
 
         return $formations;
     }
+
+
 
 
 
