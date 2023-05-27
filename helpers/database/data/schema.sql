@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS User (
     user_password TEXT NOT NULL,
     email TEXT NOT NULL,
     role INT NOT NULL,
-    FOREIGN KEY (role) REFERENCES UserRole(role_id)
+    FOREIGN KEY (role) REFERENCES UserRole(role_id) 
 );
 
 CREATE TABLE IF NOT EXISTS School (
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Formation (
     formation_id INT PRIMARY KEY AUTO_INCREMENT,
     formation_name TEXT NOT NULL,
     formation_school_id INT NOT NULL,
-    FOREIGN KEY (formation_school_id) REFERENCES School(school_id)
+    FOREIGN KEY (formation_school_id) REFERENCES School(school_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS FormationApplication (
@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS FormationApplication (
     formation_application_user_id INT NOT NULL,
     formation_application_school_id INT NOT NULL,
 
-    FOREIGN KEY (formation_application_user_id) REFERENCES User(user_id),
-    FOREIGN KEY (formation_application_school_id) REFERENCES School(school_id)
+    FOREIGN KEY (formation_application_user_id) REFERENCES User(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (formation_application_school_id) REFERENCES School(school_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS PendingApplications (
@@ -53,5 +53,5 @@ CREATE TABLE IF NOT EXISTS PendingApplications (
     adresse VARCHAR(255) NOT NULL,
     school_id INT NOT NULL ,
 
-    FOREIGN KEY (school_id) REFERENCES School(school_id)
+    FOREIGN KEY (school_id) REFERENCES School(school_id) ON DELETE CASCADE
 )

@@ -34,8 +34,15 @@ $controller = new DatabaseController($conn);
             
             $schools = $controller->getSchools();
 
+            if(
+                count ($schools) == 0
+            ){
+                echo '<h1 class="title">Aucune ecole trouver </h1>';
+                return;
+            }
+
             foreach($schools as $school){
-                    include_once $adminRoot.'/components/school_item.php';
+                    include $adminRoot.'/components/school_item.php';
             }
             ?>
         </div>

@@ -11,6 +11,8 @@ include_once $rootPath . '/helpers/database/database_creator.php';
 
 include_once $rootPath . '/data/database_options.php';
 
+include_once $rootPath . '/data/user.php';
+
 include_once $rootPath . '/components/header.php';
 
 
@@ -18,21 +20,33 @@ $db = new DatabaseCreator();
 $conn = $db->connectToDatabase();
 $controller = new DatabaseController($conn);
 
+session_start();
 
-$options = new LoginOptions($_POST['email'], $_POST['password']);
+if (!isset($_SESSION['User']) ) {
 
-$user = $controller->loginUser($options);
+    $options = new LoginOptions($_POST['email'], $_POST['password']);
+
+    $user = $controller->loginUser($options);
+
+    if ($user != null) {
+        $_SESSION['User'] = $user;
+
+    }
 
 
-if ($user != null) {
+}
 
-    if($user->roleId == UserRole::Admin){
+
+
+if (isset($_SESSION['User'])) {
+
+    if ($_SESSION['User']->roleId == UserRole::Admin) {
         include_once $rootPath . '/features/admin/admin_panel.php';
-        
+
         return;
     }
 
-    $message = 'Bienvenue ' . $user->name . ' Vos Inscriptions';
+    $message = 'Bienvenue ' . $_SESSION['User']->name . ' Vos Inscriptions';
     echo '<section id="Les-écoles-disponibles">
             <h1 class="title">' . $message . '</h1>
             <div class="content">

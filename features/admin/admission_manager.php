@@ -36,7 +36,7 @@ $controller = new DatabaseController($conn);
         }
 
         foreach ($applications as $application) {
-            include_once $adminRoot . '/components/application_item.php';
+            include $adminRoot . '/components/application_item.php';
         }
         ?>
     </div>

@@ -18,7 +18,28 @@ class DatabaseController
     }
 
 
+    public function addSchool(CreateSchoolOptions $options)
+    {
+        $query = "INSERT INTO School (school_name, school_description, school_image_url, school_video) VALUES (:school_name, :school_description, :school_image_url, :school_video)";
 
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':school_name', $options->name);
+        $stmt->bindParam(':school_description', $options->description);
+        $stmt->bindParam(':school_image_url', $options->imageUrl);
+        $stmt->bindParam(':school_video', $options->videoUrl);
+
+        $stmt->execute();
+    }
+
+    public function deleteSchool($schoolId){
+        $query = "DELETE FROM School WHERE school_id = :school_id";
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':school_id', $schoolId);
+
+        $stmt->execute();
+        
+    }
     public function getSchools(): array
     {
         $query = "SELECT * FROM School";
@@ -121,7 +142,7 @@ class DatabaseController
                 $result['email'],
                 $result['role']
             );
-            
+
 
             return $user;
         }
@@ -192,7 +213,8 @@ class DatabaseController
 
 
 
-    function getPendingApplications() : array {
+    function getPendingApplications(): array
+    {
         $query = "SELECT * FROM PendingApplications";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
@@ -214,7 +236,7 @@ class DatabaseController
                 $row['formationId'],
                 $row['school_id']
             );
-           
+
             array_push($applications, $application);
         }
 

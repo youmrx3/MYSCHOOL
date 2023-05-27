@@ -48,4 +48,22 @@ class RegisterPendingApplicationOptions
 
 }
 
+
+class CreateSchoolOptions {
+    public string $name;
+    public string $description;
+
+    public string $imageUrl;
+
+    public string $videoUrl;
+
+
+    public function __construct(string $name, string $description, string $imageUrl ,string $videoUrl) {
+        $this->name = $name;
+        $this->description = $description;
+        $this->imageUrl = $imageUrl;
+        $this->videoUrl = $videoUrl;
+    }
+}
+
 ?>
