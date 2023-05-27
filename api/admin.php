@@ -12,6 +12,7 @@ $db = new DatabaseCreator();
 $conn = $db->connectToDatabase();
 $controller = new DatabaseController($conn);
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     if (isset($_GET['panelId'])) {
@@ -31,17 +32,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 include_once $adminRoot . '/school_editor.php';
                 break;
         }
+
+        return;
     }
 
     if (isset($_GET['deleteSchoolId'])) {
 
         $schoolId = $_GET['deleteSchoolId'];
 
-        $controller -> deleteSchool($schoolId);
-       
-
-
+        $controller->deleteSchool($schoolId);
+        return;
     }
+
+    if (isset($_GET['admissionId'])) {
+
+        $admissionId = $_GET['admissionId'];
+
+        echo $admissionId;
+
+        $controller->approveAdmission($admissionId);
+        return;
+    }
+
 
     return;
 }
@@ -52,11 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $schoolName = $_POST['school-name'];
     $schoolDescription = $_POST['school-description'];
-    
+
     $image = $_POST['school-image'];
-    
+
     $video = $_POST['school-video'];
-    
+
 
     $options = new CreateSchoolOptions($schoolName, $schoolDescription, $image, $video);
 

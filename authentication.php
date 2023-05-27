@@ -22,19 +22,18 @@ $controller = new DatabaseController($conn);
 
 session_start();
 
-if (!isset($_SESSION['User']) ) {
 
-    $options = new LoginOptions($_POST['email'], $_POST['password']);
+$options = new LoginOptions($_POST['email'], $_POST['password']);
 
-    $user = $controller->loginUser($options);
+$user = $controller->loginUser($options);
 
-    if ($user != null) {
-        $_SESSION['User'] = $user;
-
-    }
-
+if ($user != null) {
+    $_SESSION['User'] = $user;
 
 }
+
+
+
 
 
 
@@ -62,6 +61,8 @@ if (isset($_SESSION['User'])) {
 
 
 echo "Login Failed";
+
+
 
 
 ?>

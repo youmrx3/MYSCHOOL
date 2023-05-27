@@ -1,6 +1,9 @@
 let currentPanelIndex = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
+
+
+
   let navButtons = document.querySelectorAll(
     ".admin-panel .admin-sidebar .sidebar-button"
   );
@@ -32,6 +35,7 @@ function updateAdminContent() {
         setupAdmissionManager();
         return;
       }
+
 
       setupSchoolManager();
     }
@@ -80,4 +84,31 @@ function setupSchoolManager() {
   };
 }
 
-function setupAdmissionManager() {}
+function setupAdmissionManager() {
+
+  const approveBtns = document.querySelectorAll(".application-item .application-action")
+
+  approveBtns.forEach((btn,key) => {
+
+    const id = btn.getAttribute("id")
+
+    btn.onclick = () => {
+
+        console.log(id);
+        let xmlhttp = new XMLHttpRequest()
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+
+            btn.parentElement.remove(); 
+
+          }
+        };
+    
+        xmlhttp.open("GET", "/api/admin.php?admissionId=" + id, true);
+        xmlhttp.send();
+
+    }
+
+
+  })
+}

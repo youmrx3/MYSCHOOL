@@ -12,6 +12,7 @@ include_once 'components/header.php';
     <div class="admin-sidebar">
         <button class="sidebar-button">Demandes en attente</button>
         <button class="sidebar-button">Les Ecoles</button>
+
     </div>
 
     <div class="admin-content">

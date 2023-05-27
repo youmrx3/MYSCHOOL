@@ -11,11 +11,7 @@ $db = new DatabaseCreator();
 $conn = $db->connectToDatabase();
 $controller = new DatabaseController($conn);
 
-
-
 ?>
-
-
 
 
 <div class="admin-applications-listview">

@@ -17,6 +17,63 @@ class DatabaseController
         $this->pdo = $pdo;
     }
 
+    public function approveAdmission($admissionId)
+    {
+        $query = "SELECT * FROM PendingApplications WHERE id = :id";
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':id', $admissionId);
+        $stmt -> execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $application = new PendingApplication(
+            $result['id'],
+            $result['nom'],
+            $result['objet'],
+            $result['email'],
+            $result['commentaire'],
+            $result['numero'],
+            $result['date'],
+            $result['autres'],
+            $result['adresse'],
+            $result['school_id']
+        );
+
+        $query = "SELECT * FROM User WHERE email = :email";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':email', $application->email);
+        $stmt -> execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $this->applyToFormation($application->school_id, $result['user_id']);
+
+
+        } else {
+
+            $registerOptions = new RegisterUserOptions(
+                $application->email,
+                "123",
+                $application->name
+            );
+
+            $this->registerUser($registerOptions);
+
+            $query = "SELECT * FROM User WHERE email = :email";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':email', $application->email);
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $this->applyToFormation($application->school_id, $result['user_id']);
+
+        }
+
+        $this->deletePendingApplication($application->id);
+    }
+
 
     public function addSchool(CreateSchoolOptions $options)
     {
@@ -31,14 +88,15 @@ class DatabaseController
         $stmt->execute();
     }
 
-    public function deleteSchool($schoolId){
+    public function deleteSchool($schoolId)
+    {
         $query = "DELETE FROM School WHERE school_id = :school_id";
 
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':school_id', $schoolId);
 
         $stmt->execute();
-        
+
     }
     public function getSchools(): array
     {
@@ -117,7 +175,7 @@ class DatabaseController
 
     public function registerUser(RegisterUserOptions $user)
     {
-        $query = "INSERT INTO User (email, user_password, username) VALUES (:email, :password, :name)";
+        $query = "INSERT INTO User (email, user_password, username,role) VALUES (:email, :password, :name,2)";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':email', $user->email);
         $stmt->bindParam(':password', $user->password);
@@ -151,11 +209,11 @@ class DatabaseController
     }
 
 
-    function applyToFormation(int $formationId, int $userId)
+    function applyToFormation(int $schoolId, int $userId)
     {
-        $query = "INSERT INTO FormationApplication (formation_id, user_id) VALUES (:formation_id, :user_id)";
+        $query = "INSERT INTO FormationApplication (formation_application_school_id, formation_application_user_id) VALUES (:school_id, :user_id)";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':formation_id', $formationId);
+        $stmt->bindParam(':school_id', $schoolId);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();
     }
@@ -166,7 +224,7 @@ class DatabaseController
         numero ,date ,autres  ,adresse,school_id )
          VALUES(:nom ,:objet ,:email ,:commentaire,:numero ,:date ,:autres , 'adresse',:schoolId )";
         $stmt = $this->pdo->prepare($query);
-        
+
         $stmt->bindParam(':nom', $options->nom);
         $stmt->bindParam(':objet', $options->objet);
         $stmt->bindParam(':email', $options->email);
@@ -217,7 +275,6 @@ class DatabaseController
         $query = "SELECT * FROM PendingApplications";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $applications = array();
@@ -242,6 +299,17 @@ class DatabaseController
         return $applications;
     }
 
+
+    function deletePendingApplication($id)
+    {
+        $query = "DELETE  FROM PendingApplications WHERE id = :id ";
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+
+    }
 
 
 }

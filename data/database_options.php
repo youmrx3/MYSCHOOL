@@ -19,7 +19,14 @@ class RegisterUserOptions
     public string $email;
     public string $password;
     public string $name;
-    public int $schoolId;
+
+    public function __construct(
+        string $email, string $password, string $name
+    ) {
+        $this->name = $name;
+        $this->email = $email;
+        $this->password = $password;
+    }
 }
 
 
