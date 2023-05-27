@@ -2,11 +2,19 @@ CREATE DATABASE IF NOT EXISTS mySchool;
 
 USE mySchool;
 
+
+CREATE TABLE IF NOT EXISTS UserRole (
+    role_id INT PRIMARY KEY AUTO_INCREMENT,
+    role_name TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS User (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     username TEXT NOT NULL,
     user_password TEXT NOT NULL,
-    email TEXT NOT NULL
+    email TEXT NOT NULL,
+    role INT NOT NULL,
+    FOREIGN KEY (role) REFERENCES UserRole(role_id)
 );
 
 CREATE TABLE IF NOT EXISTS School (

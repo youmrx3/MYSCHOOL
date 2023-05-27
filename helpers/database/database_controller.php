@@ -115,10 +115,14 @@ class DatabaseController
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            $user = new User();
-            $user->id = $result['user_id'];
-            $user->name = $result['username'];
-            $user->email = $result['email'];
+            $user = new User(
+                $result['user_id'],
+                $result['username'],
+                $result['email'],
+                $result['role']
+            );
+            
+
             return $user;
         }
 
@@ -187,6 +191,35 @@ class DatabaseController
     }
 
 
+
+    function getPendingApplications() : array {
+        $query = "SELECT * FROM PendingApplications";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $applications = array();
+
+        foreach ($result as $row) {
+            $application = new PendingApplication(
+                $row['nom'],
+                $row['objet'],
+                $row['email'],
+                $row['commentaire'],
+                $row['numero'],
+                $row['date'],
+                $row['autres'],
+                $row['adresse'],
+                $row['formationId'],
+                $row['school_id']
+            );
+           
+            array_push($applications, $application);
+        }
+
+        return $applications;
+    }
 
 
 

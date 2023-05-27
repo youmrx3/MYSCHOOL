@@ -26,6 +26,12 @@ $user = $controller->loginUser($options);
 
 if ($user != null) {
 
+    if($user->roleId == UserRole::Admin){
+        include_once $rootPath . '/features/admin/admin_panel.php';
+        
+        return;
+    }
+
     $message = 'Bienvenue ' . $user->name . ' Vos Inscriptions';
     echo '<section id="Les-écoles-disponibles">
             <h1 class="title">' . $message . '</h1>
