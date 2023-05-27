@@ -12,7 +12,7 @@ class Formation
 class PendingApplication
 {
     public $id;
-    public $nom;
+    public $name;
     public $objet;
     public $email;
     public $commentaire;
@@ -24,7 +24,7 @@ class PendingApplication
 
     public function __construct(
         $id,
-        $nom,
+        $name,
         $objet,
         $email,
         $commentaire,
@@ -35,7 +35,7 @@ class PendingApplication
         $school_id
     ) {
         $this->id = $id;
-        $this->nom = $nom;
+        $this->name = $name;
         $this->objet = $objet;
         $this->email = $email;
         $this->commentaire = $commentaire;

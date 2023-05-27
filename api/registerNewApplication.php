@@ -15,7 +15,6 @@ $db = new DatabaseCreator();
 $conn = $db->connectToDatabase();
 $controller = new DatabaseController($conn);
 
-
 $options = new RegisterPendingApplicationOptions(
     $_POST['nom'],
     $_POST['objet'],
@@ -24,7 +23,7 @@ $options = new RegisterPendingApplicationOptions(
     $_POST['numero'],
     $_POST['date'],
     $_POST['autres'],
-    $_POST['formationId']
+    $_POST['schoolId']
 );
 
 

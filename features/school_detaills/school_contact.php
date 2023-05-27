@@ -5,7 +5,7 @@
             <div class="left-right">
                 <div class="left">
                     <?php 
-                        echo '<input type="hidden" name="formationId" value="' . $schoolId.'" />'; 
+                        echo '<input type="hidden" name="schoolId" value="' . $schoolId.'" />'; 
                     ?>
                     <label>Nom Complet</label>
                     <input type="text" name="nom">

@@ -1,0 +1,23 @@
+@startuml components
+
+
+[school.php] --> [header.php]
+[school.php] --> [intro.php]
+[school.php] --> [offers.php]
+[school.php] --> [contact.php]
+[school.php] --> [navbar.php]
+
+[index.php] --> [header.php]
+[index.php] --> [login_modal.php]
+[index.php] --> [school_grid.php]
+
+[school_grid.php] --> [school_card.php]
+
+[authenticate.php] --> [header.php]
+[authenticate.php] --> [admin_panel.php]
+[authenticate.php] --> [user_subscriptions.php]
+
+[admin_panel.php] --> [school_manager.php]
+[admin_panel.php] --> [addmissions_manager.php]
+
+@enduml

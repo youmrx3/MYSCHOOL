@@ -1,0 +1,87 @@
+@startuml data_classes 
+
+class Formation {
+  +id: int
+  +name: string
+}
+
+class PendingApplication {
+  +id
+  +name
+  +objet
+  +email
+  +commentaire
+  +numero
+  +date
+  +autres
+  +adresse
+  +school_id
+  +__construct(id, name, objet, email, commentaire, numero, date, autres, adresse, school_id)
+}
+
+Formation --> PendingApplication
+
+
+class LoginOptions {
+  +email: string
+  +password: string
+  +__construct(email: string, password: string)
+}
+
+class RegisterUserOptions {
+  +email: string
+  +password: string
+  +name: string
+  +schoolId: int
+}
+
+class RegisterPendingApplicationOptions {
+  +nom
+  +objet
+  +email
+  +commentaire
+  +numero
+  +date
+  +autres
+  +schoolId
+  +__construct(nom, objet, email, commentaire, numero, date, autres, schoolId)
+}
+
+class CreateSchoolOptions {
+  +name: string
+  +description: string
+  +imageUrl: string
+  +videoUrl: string
+  +__construct(name: string, description: string, imageUrl: string, videoUrl: string)
+}
+
+LoginOptions --> RegisterUserOptions
+RegisterUserOptions --> RegisterPendingApplicationOptions
+RegisterPendingApplicationOptions --> CreateSchoolOptions
+
+
+class School {
+  +schoolId: int
+  +name: string
+  +imageUrl: string
+  +videoUrl: string
+  +description: string
+}
+
+class User {
+  +email: string
+  +name: string
+  +id: int
+  +roleId: int
+  +__construct(id: int, email: string, name: string, roleId: int)
+}
+
+class UserRole {
+  {static} +Admin: int
+  {static} +User: int
+}
+
+School --> User
+
+
+@enduml 

@@ -163,11 +163,10 @@ class DatabaseController
     function RegisterPendingApplication(RegisterPendingApplicationOptions $options)
     {
         $query = "INSERT INTO PendingApplications (nom ,objet ,email ,commentaire ,
-        numero ,date ,autres  ,adresse,formationId )
-         VALUES(:nom ,:objet ,:email ,:commentaire,:numero ,:date ,:autres , 'adresse',:formationId )";
+        numero ,date ,autres  ,adresse,school_id )
+         VALUES(:nom ,:objet ,:email ,:commentaire,:numero ,:date ,:autres , 'adresse',:schoolId )";
         $stmt = $this->pdo->prepare($query);
-
-
+        
         $stmt->bindParam(':nom', $options->nom);
         $stmt->bindParam(':objet', $options->objet);
         $stmt->bindParam(':email', $options->email);
@@ -175,7 +174,7 @@ class DatabaseController
         $stmt->bindParam(':numero', $options->numero);
         $stmt->bindParam(':date', $options->date);
         $stmt->bindParam(':autres', $options->autres);
-        $stmt->bindParam(':formationId', $options->formationId);
+        $stmt->bindParam(':schoolId', $options->schoolId);
 
         $stmt->execute();
     }
@@ -225,6 +224,7 @@ class DatabaseController
 
         foreach ($result as $row) {
             $application = new PendingApplication(
+                $row['id'],
                 $row['nom'],
                 $row['objet'],
                 $row['email'],
@@ -233,7 +233,6 @@ class DatabaseController
                 $row['date'],
                 $row['autres'],
                 $row['adresse'],
-                $row['formationId'],
                 $row['school_id']
             );
 

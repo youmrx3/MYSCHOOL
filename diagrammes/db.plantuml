@@ -1,0 +1,67 @@
+@startuml
+
+!define Table(name, desc) class name as "desc" << (T,#FFAAAA) >>
+!define PrimaryKey(x) <color:Blue>x</color>
+!define ForeignKey(x) <color:Green>x</color>
+hide circle
+hide empty attributes
+
+Table(UserRole, "UserRole") {
+  + <PrimaryKey> role_id: INT
+  --
+  + role_name: TEXT
+}
+
+Table(User, "User") {
+  + <PrimaryKey> user_id: INT
+  --
+  + username: TEXT
+  + user_password: TEXT
+  + email: TEXT
+  + <ForeignKey> role: INT
+}
+
+Table(School, "School") {
+  + <PrimaryKey> school_id: INT
+  --
+  + school_name: TEXT
+  + school_description: TEXT
+  + school_image_url: TEXT
+  + school_video: TEXT
+}
+
+Table(Formation, "Formation") {
+  + <PrimaryKey> formation_id: INT
+  --
+  + formation_name: TEXT
+  + <ForeignKey> formation_school_id: INT
+}
+
+Table(FormationApplication, "FormationApplication") {
+  + <PrimaryKey> formation_application_id: INT
+  --
+  + <ForeignKey> formation_application_user_id: INT
+  + <ForeignKey> formation_application_school_id: INT
+}
+
+Table(PendingApplications, "PendingApplications") {
+  + <PrimaryKey> id: INT
+  --
+  + nom: VARCHAR(255)
+  + objet: VARCHAR(255)
+  + email: VARCHAR(255)
+  + commentaire: TEXT
+  + numero: VARCHAR(20)
+  + date: TEXT
+  + autres: VARCHAR(255)
+  + adresse: VARCHAR(255)
+  + <ForeignKey> school_id: INT
+}
+
+UserRole -- User
+User -- School
+School -- Formation
+User -- FormationApplication
+School -- PendingApplications
+
+@enduml

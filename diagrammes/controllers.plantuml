@@ -1,0 +1,110 @@
+@startuml controllers
+
+
+class DatabaseController {
+  -pdo: PDO
+  +__construct(pdo: PDO)
+  +addSchool(options: CreateSchoolOptions): void
+  +deleteSchool(schoolId: mixed): void
+  +getSchools(): array
+  +getSchool(schoolId: string)
+  +getSchoolFormations(schoolId: string): array
+  +registerUser(user: RegisterUserOptions): void
+  +loginUser(options: LoginOptions): User|null
+  +applyToFormation(formationId: int, userId: int): void
+  +RegisterPendingApplication(options: RegisterPendingApplicationOptions): void
+  +loadUserFormations(userId: int): array
+  +getPendingApplications(): array
+}
+
+class DatabaseCreator {
+  -servername: string
+  -username: string
+  -password: string
+  -dbname: string
+  +connectToDatabase(): PDO
+  -createSchema(conn: PDO): void
+}
+
+class School {
+  +schoolId: int
+  +name: String
+  +imageUrl: String
+  +videoUrl: String
+  +description: String
+}
+
+class User {
+  +email: string
+  +name: string
+  +id: int
+  +roleId: int
+  +__construct(id: int, email: string, name: string, roleId: int)
+}
+
+class CreateSchoolOptions {
+  +name: string
+  +description: string
+  +imageUrl: string
+  +videoUrl: string
+}
+
+class PendingApplication {
+  +id: mixed
+  +name: mixed
+  +objet: mixed
+  +email: mixed
+  +commentaire: mixed
+  +numero: mixed
+  +date: mixed
+  +autres: mixed
+  +adresse: mixed
+  +school_id: mixed
+  +__construct(id: mixed, name: mixed, objet: mixed, email: mixed, commentaire: mixed, numero: mixed, date: mixed, autres: mixed, adresse: mixed, school_id: mixed)
+}
+
+class LoginOptions {
+  +email: string
+  +password: string
+  +__construct(email: string, password: string)
+}
+
+class RegisterUserOptions {
+  +email: string
+  +password: string
+  +name: string
+  +schoolId: int
+}
+
+class RegisterPendingApplicationOptions {
+  +nom: mixed
+  +objet: mixed
+  +email: mixed
+  +commentaire: mixed
+  +numero: mixed
+  +date: mixed
+  +autres: mixed
+  +schoolId: mixed
+  +__construct(nom: mixed, objet: mixed, email: mixed, commentaire: mixed, numero: mixed, date: mixed, autres: mixed, schoolId: mixed)
+}
+
+class Formation {
+  +id: int
+  +name: string
+}
+
+DatabaseController --> PDO
+DatabaseController --> CreateSchoolOptions
+DatabaseController --> School
+DatabaseController --> RegisterUserOptions
+DatabaseController --> LoginOptions
+DatabaseController --> User
+DatabaseController --> RegisterPendingApplicationOptions
+DatabaseController --> PendingApplication
+DatabaseController --> Formation
+
+DatabaseCreator --> PDO
+
+
+
+@enduml

@@ -33,9 +33,10 @@ class RegisterPendingApplicationOptions
     public $date;
     public $autres;
 
-    public $formationId;
+    public $schoolId;
 
-    public function __construct($nom, $objet, $email, $commentaire, $numero, $date, $autres, $formationId) {
+    public function __construct($nom, $objet, $email, $commentaire, $numero, $date, $autres, $schoolId)
+    {
         $this->nom = $nom;
         $this->objet = $objet;
         $this->email = $email;
@@ -43,13 +44,14 @@ class RegisterPendingApplicationOptions
         $this->numero = $numero;
         $this->date = $date;
         $this->autres = $autres;
-        $this ->  $formationId =  $formationId;
+        $this->schoolId = $schoolId;
     }
 
 }
 
 
-class CreateSchoolOptions {
+class CreateSchoolOptions
+{
     public string $name;
     public string $description;
 
@@ -58,7 +60,8 @@ class CreateSchoolOptions {
     public string $videoUrl;
 
 
-    public function __construct(string $name, string $description, string $imageUrl ,string $videoUrl) {
+    public function __construct(string $name, string $description, string $imageUrl, string $videoUrl)
+    {
         $this->name = $name;
         $this->description = $description;
         $this->imageUrl = $imageUrl;
